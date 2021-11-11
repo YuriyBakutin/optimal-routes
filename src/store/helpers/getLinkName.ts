@@ -1,0 +1,1 @@
+export default (src: string, des: string) => src + ' ' + des

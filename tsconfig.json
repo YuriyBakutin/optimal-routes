@@ -2,11 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "module": "ESNext",
-    "target": "es2016",
-    "lib": [
-      "DOM",
-      "ESNext"
-    ],
+    "target": "esnext",
     "strict": true,
     "esModuleInterop": true,
     "incremental": false,
@@ -16,6 +12,10 @@
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     "types": [
       "vite/client",
     ],
