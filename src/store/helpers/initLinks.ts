@@ -12,12 +12,16 @@ export default (companies: IRawCompanies) => {
         const linkName = getLinkName(rawLink.src, rawLink.des)
 
         if (!links[linkName]) {
-          links[linkName] = []
+          links[linkName] = { paths: [], viewedIndex: 0 }
         }
 
-        links[linkName].push({ company, price: rawLink.price })
+        links[linkName].paths.push({ company, price: rawLink.price })
       }
     )
+  }
+
+  for (const link in links) {
+    links[link].paths.sort((a, b) => a.price - b.price)
   }
 
   return links

@@ -1,6 +1,9 @@
 export default interface ILink {
   [key: string]: {
-    company: string,
-    price: number,
-  }[],
+    paths: {
+      company: string,
+      price: number,
+    }[],
+    viewedIndex: number,
+  }
 }

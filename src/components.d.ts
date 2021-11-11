@@ -4,6 +4,9 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    CountrySelect: typeof import('./components/CountrySelect.vue')['default']
+    FilterCard: typeof import('./components/FilterCard.vue')['default']
+    FilterForm: typeof import('./components/FilterForm.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     Hello: typeof import('./components/Hello.vue')['default']
   }

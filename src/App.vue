@@ -1,8 +1,22 @@
+<script lang="ts" setup>
+  import { useStore } from './store'
+import FilterCard from './components/FilterCard.vue';
+  // import { storeToRefs } from 'pinia'
+
+  const store = useStore()
+  // const {  } = storeToRefs(store)
+
+  store.initStaticData()
+
+  const activeIndex = ref('1')
+</script>
 <template>
   <ElContainer class="text-center">
     <ElHeader class="text-center">Рассчитать дешёвый маршрут</ElHeader>
     <el-container>
-      <el-aside width="300px">Filters</el-aside>
+      <el-aside width="340px">
+        <FilterCard />
+      </el-aside>
       <el-container
         direction="vertical"
       >
@@ -19,6 +33,3 @@
     </el-container>
   </ElContainer>
 </template>
-<script lang="ts" setup>
-const activeIndex = ref('1')
-</script>
