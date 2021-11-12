@@ -1,28 +1,34 @@
 import IRawCompanies from '~/store/types/IRawCompanies'
 import IRawLink from '~/store/types/IRawLink'
-import ILink from '~/store/types/ILink'
-import getLinkName from './getLinkName'
+import IPath from '~/store/types/IPath'
 
-export default (companies: IRawCompanies) => {
-  const links: ILink = {}
+export default (companies: IRawCompanies, countries: { [key: string]: string }) => {
+  const paths: IPath = {}
+
+  for (const countryCode in countries) {
+    paths[countryCode] = {}
+  }
 
   for (const company in companies) {
     companies[company].forEach(
       (rawLink: IRawLink) => {
-        const linkName = getLinkName(rawLink.src, rawLink.des)
+        // if (!paths[rawLink.src]) {
+        //   paths[rawLink.src] = {}
+        // }
 
-        if (!links[linkName]) {
-          links[linkName] = { paths: [], viewedIndex: 0 }
+        if (!paths[rawLink.src][rawLink.des]) {
+          paths[rawLink.src][rawLink.des] = { links: [], viewedIndex: 0 }
         }
 
-        links[linkName].paths.push({ company, price: rawLink.price })
+        paths[rawLink.src][rawLink.des].links.push({ company, price: rawLink.price })
       }
     )
   }
 
-  for (const link in links) {
-    links[link].paths.sort((a, b) => a.price - b.price)
+  for (const src in paths) {
+    for (const des in paths[src])
+      paths[src][des].links.sort((a, b) => a.price - b.price)
   }
 
-  return links
+  return paths
 }

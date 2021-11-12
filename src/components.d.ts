@@ -9,6 +9,8 @@ declare module 'vue' {
     FilterForm: typeof import('./components/FilterForm.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     Hello: typeof import('./components/Hello.vue')['default']
+    Route: typeof import('./components/Route.vue')['default']
+    RoutesPull: typeof import('./components/RoutesPull.vue')['default']
   }
 }
 

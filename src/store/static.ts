@@ -1,6 +1,8 @@
-import ILink from '~/store/types/ILink'
+import IPath from '~/store/types/IPath'
+import IGraph from '~/store/types/IGraph'
 
 export default {
-  links: {} as ILink,
-  countriesList: [] as { value: string, label: string }[]
+  paths: {} as IPath,
+  countriesList: [] as { value: string, label: string }[],
+  currentGraph: {} as IGraph,
 }

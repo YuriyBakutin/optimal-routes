@@ -16,12 +16,12 @@
     pointRole: PointRoles,
   }>()
 
-  const country = computed({
+  const node = computed({
     get() {
-      return store.getCountryByRole(props.pointRole)
+      return store.getNodeByRole(props.pointRole)
     },
-    set(value: string) {
-      store.setCountryByRole(props.pointRole, value)
+    set(value: string | null) {
+      store.setNodeByRole(props.pointRole, value)
     }
   })
 
@@ -33,16 +33,17 @@
     () => props.pointRole === PointRoles.src ? des.value : src.value
   )
 
-  const countriesList = computed(() => (staticData.countriesList.filter(
+   const countriesList = computed(() => (staticData.countriesList.filter(
     (countryData) => (countryData.value !== busyCountry.value)
   )))
 </script>
 
 <template>
   <el-select-v2
-    v-model="country"
+    v-model="node"
     :options="countriesList"
     :placeholder="placeholder"
+    clearable
     style="width: 280px"
     class="mb3 text-left"
   />

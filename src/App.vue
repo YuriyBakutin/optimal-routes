@@ -1,12 +1,20 @@
 <script lang="ts" setup>
   import { useStore } from './store'
-import FilterCard from './components/FilterCard.vue';
+  import FilterCard from './components/FilterCard.vue';
+import RoutesPull from './components/RoutesPull.vue';
   // import { storeToRefs } from 'pinia'
 
   const store = useStore()
   // const {  } = storeToRefs(store)
 
   store.initStaticData()
+
+  const src = computed(() => store.src)
+  const des = computed(() => store.des)
+
+  watchEffect(() => {
+    store.getRoutes(src.value, des.value)
+  })
 
   const activeIndex = ref('1')
 </script>
@@ -20,7 +28,9 @@ import FilterCard from './components/FilterCard.vue';
       <el-container
         direction="vertical"
       >
-        <el-menu>Connection routes</el-menu>
+        <el-menu>
+          <RoutesPull />
+        </el-menu>
         <el-menu
           :default-active="activeIndex"
           mode="horizontal"

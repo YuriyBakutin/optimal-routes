@@ -4,7 +4,7 @@
       "waterTel": [
         {
           "src": "kz",
-          "des": "usa",
+          "des": "us",
           "price": 9
         },
         {
@@ -13,7 +13,7 @@
           "price": 14
         },
         {
-          "src": "usa",
+          "src": "us",
           "des": "de",
           "price": 22
         },
@@ -29,14 +29,14 @@
         },
         {
           "src": "ru",
-          "des": "usa",
+          "des": "us",
           "price": 22
         }
       ],
       "airTel": [
         {
           "src": "kz",
-          "des": "usa",
+          "des": "us",
           "price": 11
         },
         {
@@ -45,7 +45,7 @@
           "price": 8
         },
         {
-          "src": "usa",
+          "src": "us",
           "des": "de",
           "price": 16
         },
@@ -61,14 +61,14 @@
         },
         {
           "src": "ru",
-          "des": "usa",
+          "des": "us",
           "price": 17
         }
       ],
       "earthTel": [
         {
           "src": "kz",
-          "des": "usa",
+          "des": "us",
           "price": 17
         },
         {
@@ -77,7 +77,7 @@
           "price": 13
         },
         {
-          "src": "usa",
+          "src": "us",
           "des": "de",
           "price": 19
         },
@@ -93,14 +93,14 @@
         },
         {
           "src": "ru",
-          "des": "usa",
+          "des": "us",
           "price": 24
         }
       ],
       "fireTel": [
         {
           "src": "kz",
-          "des": "usa",
+          "des": "us",
           "price": 23
         },
         {
@@ -109,7 +109,7 @@
           "price": 17
         },
         {
-          "src": "usa",
+          "src": "us",
           "des": "de",
           "price": 21
         },
@@ -125,7 +125,7 @@
         },
         {
           "src": "ru",
-          "des": "usa",
+          "des": "us",
           "price": 30
         }
       ]
