@@ -44,7 +44,6 @@
     :options="countriesList"
     :placeholder="placeholder"
     clearable
-    class="mb3 text-left"
-    style="width: 270px;"
+    class="mb4 text-left"
   />
 </template>

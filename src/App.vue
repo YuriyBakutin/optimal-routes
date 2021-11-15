@@ -18,31 +18,41 @@
     store.switchToNewDirection(src.value, des.value)
   })
 
+  const onResizeHandler = () => {
+    store.setAppHeight(window.document.body.clientHeight)
+  }
+
+  onMounted(() => {
+    store.setAppHeight(window.document.body.clientHeight)
+
+    window.addEventListener('resize', onResizeHandler)
+  })
+
   const activeIndex = ref('1')
 </script>
 <template>
-  <ElContainer class="r text-center" style="height: 100%;">
+  <ElContainer class="r text-center pt3" style="height: 100%;">
     <ElHeader class="text-center">Рассчитать дешёвый маршрут</ElHeader>
-    <el-container>
-      <el-aside width="340px">
+    <ElContainer>
+      <ElAside width="340px">
         <FilterCard />
-      </el-aside>
-      <el-container
+      </ElAside>
+      <ElContainer
         direction="vertical"
         class="px4 flex flex-col between"
       >
-        <el-menu style="height: 100%;">
+        <ElMenu>
           <RoutesPull />
-        </el-menu>
-        <el-menu
+        </ElMenu>
+        <ElMenu
           :default-active="activeIndex"
           mode="horizontal"
         >
-          <el-menu-item index="1">1</el-menu-item>
-          <el-menu-item index="2">2</el-menu-item>
-          <el-menu-item index="3">3</el-menu-item>
-        </el-menu>
-      </el-container>
-    </el-container>
+          <ElMenuItem index="1">1</ElMenuItem>
+          <ElMenuItem index="2">2</ElMenuItem>
+          <ElMenuItem index="3">3</ElMenuItem>
+        </ElMenu>
+      </ElContainer>
+    </ElContainer>
   </ElContainer>
 </template>

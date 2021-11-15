@@ -9,6 +9,7 @@
     routes,
     selectedPage,
     routesPerPage,
+    checkedRoutesFilters,
   } = storeToRefs(store)
 
   const routesShown = computed(() => {
@@ -27,7 +28,20 @@
       store.initRoutesByDes()
     }
 
-    return routes.value[src.value][des.value].slice(pageRoutesIndex, nextPageRoutesIndex)
+    const filteredRoutes = routes.value[src.value][des.value].filter(
+      (route) => {
+        // return true
+        const additionalNodesNumber = route.links.length - 1
+        // console.log('additionalNodesNumber: ', additionalNodesNumber);
+        // console.log('checkedRoutesFilters.value: ', checkedRoutesFilters.value);
+
+        // const i = checkedRoutesFilters.value.includes(additionalNodesNumber)
+        // console.log('i: ', i);
+        return checkedRoutesFilters.value.includes(additionalNodesNumber)
+      }
+    )
+
+    return filteredRoutes.slice(pageRoutesIndex, nextPageRoutesIndex)
   })
 
 </script>

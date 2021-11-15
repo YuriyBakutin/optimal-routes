@@ -5,9 +5,15 @@
     route: IRouteUI,
   }>()
 
+  const routeEl = ref(null as null | HTMLElement)
+
+  onMounted(() => {
+    (routeEl.value as HTMLElement).clientHeight
+  })
+
 </script>
 <template>
-  <el-card class="box-card mb3" >
+  <el-card class="box-card mb3" ref="routeEl">
     <div class="flex flex-row between a-center">
       <el-avatar class="bg-orange-600">{{props.route.prise}}$</el-avatar>
       <div class="ml4 fit flex flex-row j-center a-end">
