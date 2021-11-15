@@ -1,9 +1,17 @@
+# Об этой папке и об особенностях сборки
+
 ## Components
 
-Components in this dir will be auto-registered and on-demand, powered by [`unplugin-vue-components`](https://github.com/antfu/unplugin-vue-components).
+**Components** — это папка, настроенная так, что при размещении в ней компонентов, они автоматически становятся глобальными и не требуют импорта и регистрации.
 
-### Icons
+Такое поведение обеспечивается плагином [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components).
 
-You can use icons from almost any icon sets by the power of [Iconify](https://iconify.design/).
+## Методы Vue (ref, computed, watch, watchEffect и т.п.)
 
-It will only bundle the icons you use. Check out [`unplugin-icons`](https://github.com/antfu/unplugin-icons) for more details.
+Методы Vue определены, как глобальные, и не требуют импортов. Это обеспечивается плагином [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import)
+
+## Icons
+
+Можно использовать в качестве компонента любую пиктограмму из набора [Iconify](https://iconify.design/).
+
+Эту возможность обеспечивает плагин [unplugin-icons](https://github.com/antfu/unplugin-icons).

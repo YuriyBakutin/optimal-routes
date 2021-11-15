@@ -1,4 +1,4 @@
-import IGraph from '~/store/types/IGraph'
+import IGraph from '~/data/types/IGraph'
 
 export default function dijkstraShortestPath(
   params: { graph: IGraph, start: string, end: string }

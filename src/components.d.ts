@@ -5,10 +5,21 @@
 declare module 'vue' {
   export interface GlobalComponents {
     CountrySelect: typeof import('./components/CountrySelect.vue')['default']
+    ElAside: typeof import('~icons/el/aside')['default']
+    ElAvatar: typeof import('~icons/el/avatar')['default']
+    ElCard: typeof import('~icons/el/card')['default']
+    ElContainer: typeof import('~icons/el/container')['default']
+    ElHeader: typeof import('~icons/el/header')['default']
+    ElMenu: typeof import('~icons/el/menu')['default']
+    ElMenuItem: typeof import('~icons/el/menu-item')['default']
+    ElSelectV2: typeof import('~icons/el/select-v2')['default']
     FilterCard: typeof import('./components/FilterCard.vue')['default']
     FilterForm: typeof import('./components/FilterForm.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     Hello: typeof import('./components/Hello.vue')['default']
+    IBiArrowRight: typeof import('~icons/bi/arrow-right')['default']
+    Link: typeof import('./components/Link.vue')['default']
+    Node: typeof import('./components/Node.vue')['default']
     Route: typeof import('./components/Route.vue')['default']
     RoutesPull: typeof import('./components/RoutesPull.vue')['default']
   }

@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-  import { useStore } from './store'
-  import FilterCard from './components/FilterCard.vue';
-import RoutesPull from './components/RoutesPull.vue';
+  import { useStore } from './data/store'
   // import { storeToRefs } from 'pinia'
 
   const store = useStore()
@@ -13,13 +11,17 @@ import RoutesPull from './components/RoutesPull.vue';
   const des = computed(() => store.des)
 
   watchEffect(() => {
-    store.getRoutes(src.value, des.value)
+    if(!src.value || !des.value) {
+      return
+    }
+
+    store.switchToNewDirection(src.value, des.value)
   })
 
   const activeIndex = ref('1')
 </script>
 <template>
-  <ElContainer class="text-center">
+  <ElContainer class="r text-center" style="height: 100%;">
     <ElHeader class="text-center">Рассчитать дешёвый маршрут</ElHeader>
     <el-container>
       <el-aside width="340px">
@@ -27,17 +29,18 @@ import RoutesPull from './components/RoutesPull.vue';
       </el-aside>
       <el-container
         direction="vertical"
+        class="px4 flex flex-col between"
       >
-        <el-menu>
+        <el-menu style="height: 100%;">
           <RoutesPull />
         </el-menu>
         <el-menu
           :default-active="activeIndex"
           mode="horizontal"
         >
-        <el-menu-item index="1">1</el-menu-item>
-        <el-menu-item index="2">2</el-menu-item>
-        <el-menu-item index="3">3</el-menu-item>
+          <el-menu-item index="1">1</el-menu-item>
+          <el-menu-item index="2">2</el-menu-item>
+          <el-menu-item index="3">3</el-menu-item>
         </el-menu>
       </el-container>
     </el-container>

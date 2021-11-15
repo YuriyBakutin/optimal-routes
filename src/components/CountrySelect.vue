@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import PointRoles from '~/store/types/PointRoles'
-  import staticData from '~/store/static'
-  import { useStore } from '~/store'
+  import PointRoles from '~/data/types/PointRoles'
+  import nonReactiveData from '~/data/nonReactive'
+  import { useStore } from '~/data/store'
   import { storeToRefs } from 'pinia'
 
   const store = useStore()
@@ -33,7 +33,7 @@
     () => props.pointRole === PointRoles.src ? des.value : src.value
   )
 
-   const countriesList = computed(() => (staticData.countriesList.filter(
+   const countriesList = computed(() => (nonReactiveData.countriesList.filter(
     (countryData) => (countryData.value !== busyCountry.value)
   )))
 </script>
@@ -44,7 +44,7 @@
     :options="countriesList"
     :placeholder="placeholder"
     clearable
-    style="width: 280px"
     class="mb3 text-left"
+    style="width: 270px;"
   />
 </template>

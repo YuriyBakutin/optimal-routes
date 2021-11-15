@@ -1,6 +1,8 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import styleImport from 'vite-plugin-style-import'
 import Components from 'unplugin-vue-components/vite'
 import Unocss from 'unocss/vite'
@@ -38,7 +40,6 @@ export default defineConfig({
             return path.resolve(__dirname, `element-plus/packages/theme-chalk/src/${name}.css`)
           },
           resolveComponent: (name) => {
-            console.log('name: ', name)
             return path.resolve(__dirname, `element-plus/lib/${name}`)
           }
         }
@@ -47,7 +48,19 @@ export default defineConfig({
 
     // https://github.com/antfu/vite-plugin-components
     Components({
+      resolvers: [
+        // auto import icons
+        // https://github.com/antfu/vite-plugin-icons
+        IconsResolver({
+          componentPrefix: 'i',
+        }),
+      ],
       dts: 'src/components.d.ts',
+    }),
+
+    // https://github.com/antfu/vite-plugin-icons
+    Icons({
+      autoInstall: true,
     }),
 
     // https://github.com/antfu/unocss
@@ -59,6 +72,13 @@ export default defineConfig({
       presets: [
         presetUno(),
         presetAttributify(),
+      ],
+      rules: [
+        ['j-center', { 'justify-content': 'center' }],
+        ['a-center', { 'align-items': 'center' }],
+        ['a-end', { 'align-items': 'flex-end' }],
+        ['between', { 'justify-content': 'space-between' }],
+        ['fit', { width: '100%' }],
       ],
     }),
   ],
