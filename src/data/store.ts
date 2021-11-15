@@ -11,11 +11,16 @@ export const useStore = defineStore('main', {
     src: null as null | string,
     des: null as null | string,
     routes: {} as { [src: string]: { [des: string]: IRouteUI[] } },
-    selectedPage: 0,
-    routesPerPage: 5,
+    routesSearchFinished: {} as { [src: string]: { [des: string]: boolean } },
     checkedRoutesFilters: [] as number[],
     enabledRoutesFilters: [] as boolean[],
-    appHeight: 0
+    currentPage: 0,
+    routesPerPage: 5,
+    filteredRoutesLength: 0,
+    pagerCount: 0,
+    appWidth: 0,
+    appHeight: 0,
+    firstVisibleRouteIndex: 0,
   }),
   getters: {
     getNodeByRole: (state) => {
@@ -37,6 +42,13 @@ export const useStore = defineStore('main', {
 
       return routes[0]?.links.length
     },
+    getRoutesSearchFinished: (state) => {
+      if (!state.src || !state.des) {
+        return false
+      }
+
+      return state.routesSearchFinished[state.src]?.[state.des]
+    }
   },
   actions: {
     initStaticData() {
@@ -84,6 +96,13 @@ export const useStore = defineStore('main', {
         ].setSrcAndDes({ srcIndex, desIndex })
       }
     },
+    setRoutesSearchFinished({ src, des }: { src: string, des: string }) {
+      if (!this.routesSearchFinished[src]) {
+        this.routesSearchFinished[src] = {}
+      }
+
+      this.routesSearchFinished[src][des] = true
+    },
     initEnabledRoutesFilters() {
       if (
         !this.src
@@ -106,11 +125,34 @@ export const useStore = defineStore('main', {
     setCheckedRoutesFilters(checkedRoutesFilters: number[]) {
       this.checkedRoutesFilters = checkedRoutesFilters
     },
-    setAppHeight(appHeight: number) {
-      this.appHeight = appHeight
+    setAppSizes({ width, height }: { width: number, height: number }) {
+      this.appWidth = width
+      this.appHeight = height
 
       // Заголовок и подвал по 60px. Высота таблички маршрута с отступом 105px
-      this.routesPerPage = Math.floor((appHeight - 60 - 60 - 10) / 105)
+      this.routesPerPage = Math.floor((height - 60 - 60 - 10) / 105)
+      const currentIndex = this.firstVisibleRouteIndex
+      const newIndex = currentIndex - currentIndex % this.routesPerPage
+      this.firstVisibleRouteIndex = newIndex
+
+      // pager-count — это атрибут блока пагинации от Element+.
+      // Он определяет количество показываемых индексов.
+      // Здесь производится расчёт, чтобы он соответствовал ширине блока.
+      // Левая панель 340, отступы по 16, левые и правые кнопки 106, спиннер 16,
+      // ширина места 37.5. Количество мест должно быть нечётным,
+      // поэтому делим на 2, округляем, умножаем на 2 и вычитаем 1
+      // В параметре pager-count значение на 2 большее, чем число индексов в середине,
+      // Поэтому к итогу прибавляем 2
+      this.pagerCount = Math.floor(
+        (width - 340 - 16 - 16 - 106 - 106 - 16) / (37.5 * 2)
+      ) * 2 - 1 + 2
+    },
+    setCurrentPage(currentPage: number) {
+      this.currentPage = currentPage
+      this.firstVisibleRouteIndex = (currentPage - 1) * this.routesPerPage
+    },
+    setFilteredRoutesLength(filteredRoutesLength: number) {
+      this.filteredRoutesLength = filteredRoutesLength
     },
   },
 })

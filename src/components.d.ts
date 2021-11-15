@@ -20,8 +20,11 @@ declare module 'vue' {
     IBiArrowRight: typeof import('~icons/bi/arrow-right')['default']
     Link: typeof import('./components/Link.vue')['default']
     Node: typeof import('./components/Node.vue')['default']
+    Pagination: typeof import('./components/Pagination.vue')['default']
     Route: typeof import('./components/Route.vue')['default']
     RoutesPull: typeof import('./components/RoutesPull.vue')['default']
+    Spinner: typeof import('./components/Spinner.vue')['default']
+    WaitingSpinner: typeof import('./components/WaitingSpinner.vue')['default']
   }
 }
 

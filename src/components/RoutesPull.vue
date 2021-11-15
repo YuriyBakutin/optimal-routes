@@ -7,9 +7,9 @@
     src,
     des,
     routes,
-    selectedPage,
     routesPerPage,
     checkedRoutesFilters,
+    firstVisibleRouteIndex,
   } = storeToRefs(store)
 
   const routesShown = computed(() => {
@@ -17,8 +17,7 @@
       return []
     }
 
-    const pageRoutesIndex = selectedPage.value * routesPerPage.value
-    const nextPageRoutesIndex = pageRoutesIndex + routesPerPage.value
+    const nextPageRoutesIndex = firstVisibleRouteIndex.value + routesPerPage.value
 
     if (!routes.value[src.value]) {
       store.initRoutesBySrc()
@@ -30,18 +29,15 @@
 
     const filteredRoutes = routes.value[src.value][des.value].filter(
       (route) => {
-        // return true
         const additionalNodesNumber = route.links.length - 1
-        // console.log('additionalNodesNumber: ', additionalNodesNumber);
-        // console.log('checkedRoutesFilters.value: ', checkedRoutesFilters.value);
 
-        // const i = checkedRoutesFilters.value.includes(additionalNodesNumber)
-        // console.log('i: ', i);
         return checkedRoutesFilters.value.includes(additionalNodesNumber)
       }
     )
 
-    return filteredRoutes.slice(pageRoutesIndex, nextPageRoutesIndex)
+    store.setFilteredRoutesLength(filteredRoutes.length)
+
+    return filteredRoutes.slice(firstVisibleRouteIndex.value, nextPageRoutesIndex)
   })
 
 </script>

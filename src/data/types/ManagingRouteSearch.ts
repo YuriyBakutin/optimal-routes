@@ -56,11 +56,11 @@ export default class ManagingRouteSearch {
       const key = Object.keys(this.candidatesWithoutRoutes)[0]
 
       if (!key) {
-        // TODO: Здесь должен быть выбор из candidatesWithRoutes
         const candidates = this.candidatesWithRoutes
         const keys = Object.keys(candidates)
 
         if (keys.length === 0) {
+          store.setRoutesSearchFinished({ src: this.src, des: this.des })
           return
         }
 

@@ -19,16 +19,16 @@
   })
 
   const onResizeHandler = () => {
-    store.setAppHeight(window.document.body.clientHeight)
+    const bodyEl = window.document.body
+    store.setAppSizes({ width: bodyEl.clientWidth, height: bodyEl.clientHeight})
   }
 
   onMounted(() => {
-    store.setAppHeight(window.document.body.clientHeight)
+    const bodyEl = window.document.body
+    store.setAppSizes({ width: bodyEl.clientWidth, height: bodyEl.clientHeight})
 
     window.addEventListener('resize', onResizeHandler)
   })
-
-  const activeIndex = ref('1')
 </script>
 <template>
   <ElContainer class="r text-center pt3" style="height: 100%;">
@@ -44,14 +44,7 @@
         <ElMenu>
           <RoutesPull />
         </ElMenu>
-        <ElMenu
-          :default-active="activeIndex"
-          mode="horizontal"
-        >
-          <ElMenuItem index="1">1</ElMenuItem>
-          <ElMenuItem index="2">2</ElMenuItem>
-          <ElMenuItem index="3">3</ElMenuItem>
-        </ElMenu>
+        <Pagination />
       </ElContainer>
     </ElContainer>
   </ElContainer>
