@@ -77,6 +77,7 @@ export default defineConfig({
         ['j-center', { 'justify-content': 'center' }],
         ['a-center', { 'align-items': 'center' }],
         ['a-end', { 'align-items': 'flex-end' }],
+        ['a-start', { 'align-items': 'flex-start' }],
         ['between', { 'justify-content': 'space-between' }],
         ['fit', { width: '100%' }],
       ],

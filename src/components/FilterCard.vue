@@ -5,7 +5,11 @@
   import { storeToRefs } from 'pinia'
 
   const store = useStore()
-  const { enabledRoutesFilters } = storeToRefs(store)
+  const { enabledRoutesFilters, appHeight } = storeToRefs(store)
+
+  const filterPullHeight = computed(() => {
+    return (appHeight.value - 12 - 60 - 146 - 22) + 'px'
+  })
 
   const numberOfCheckboxes = computed(() => {
     store.initEnabledRoutesFilters()
@@ -50,28 +54,38 @@
   >
     <CountrySelect :pointRole="PointRoles.src" />
     <CountrySelect :pointRole="PointRoles.des" />
-    <el-checkbox
-      v-model="checkAll"
-      :indeterminate="isIndeterminate"
-      @change="handleCheckAllChange"
-      :disabled="checkAllDisabled"
-      checked
-      >Все</el-checkbox
-    >
-    <el-checkbox-group
-      v-model="checkedRoutesFilters"
-      @change="handleCheckedCitiesChange"
-      class="flex flex-col"
+    <div
+      class="filter-pull lex flex-col text-left"
+      style="overflow-y: scroll;"
     >
       <el-checkbox
-        v-for="additionalNodesCase in nodeRange"
-        :key="additionalNodesCase"
-        :label="additionalNodesCase"
+        v-model="checkAll"
+        :indeterminate="isIndeterminate"
+        @change="handleCheckAllChange"
+        :disabled="checkAllDisabled"
         checked
-        :disabled="!enabledRoutesFilters[additionalNodesCase + 1]"
+        >Все</el-checkbox
       >
-        {{connectionsNumberPhrase(additionalNodesCase)}}
-      </el-checkbox>
-    </el-checkbox-group>
+      <el-checkbox-group
+        v-model="checkedRoutesFilters"
+        @change="handleCheckedCitiesChange"
+        class="flex flex-col"
+      >
+        <el-checkbox
+          v-for="additionalNodesCase in nodeRange"
+          :key="additionalNodesCase"
+          :label="additionalNodesCase"
+          checked
+          :disabled="!enabledRoutesFilters[additionalNodesCase + 1]"
+        >
+          {{connectionsNumberPhrase(additionalNodesCase)}}
+        </el-checkbox>
+      </el-checkbox-group>
+    </div>
   </div>
 </template>
+<style>
+.filter-pull {
+  max-height: v-bind(filterPullHeight);
+}
+</style>
